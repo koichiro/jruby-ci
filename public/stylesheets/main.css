@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+.commandButton {
+    border: ridge 5px #ffffff;
+    background-color: white;
+    color: black;
+}
+
+.coomandButton:active {
+    border: groove 5px #ff00ff;
+    backgrpound-color: black;
+    color: white;
+}
+
+#controlePanel {
+    margin: 10px;
+}
+
+#output {
+    mergin: 10px;
+}
+
