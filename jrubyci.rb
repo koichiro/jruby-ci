@@ -12,7 +12,7 @@ import com.sun.syndication.io.SyndFeedInput
 DataMapper.setup(:default, "appengine://auto")
 JRUBY_REPOSITORY_FEED_URL = java.net.URL.new("http://github.com/feeds/jruby/commits/jruby/master")
 TWITTER_ID_TABLE = {
-  "Thomas E.Enebo" => "@tom_enebo",
+  "Thomas E. Enebo" => "@tom_enebo",
   "Charles Oliver Nutter" => "@headius",
   "Nick Siger" => "@nicksiger",
   "Yoko Harada" => "@yokolet",
