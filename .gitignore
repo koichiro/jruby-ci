@@ -1,1 +1,3 @@
 WEB-INF/appengine-web.xml
+WEB-INF/appengine-generated/local_db.bin
+WEB-INF/appengine-generated/datastore-indexes-auto.xml

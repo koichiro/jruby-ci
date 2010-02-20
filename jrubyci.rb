@@ -11,6 +11,17 @@ import com.sun.syndication.io.SyndFeedInput
 
 DataMapper.setup(:default, "appengine://auto")
 JRUBY_REPOSITORY_FEED_URL = java.net.URL.new("http://github.com/feeds/jruby/commits/jruby/master")
+TWITTER_ID_TABLE = {
+  "Thomas E.Enebo" => "@tom_enebo",
+  "Charles Oliver Nutter" => "@headius",
+  "Nick Siger" => "@nicksiger",
+  "Yoko Harada" => "@yokolet",
+  "NAKAMURA" => "@nahi",
+  "Vladimir Sizikov" => "@vsizikov",
+  "Hiro Asari" => "@hiro_asari",
+  "Wayne Meissner" => "@wmeissner",
+  "Ola Bini" => "@olabini"
+}
 $logger = AppEngine::Logger.new
 
 class CommitLog
@@ -78,8 +89,12 @@ def git_rev(uri)
   end
 end
 
+def twitter_id(author)
+  TWITTER_ID_TABLE[author] ? TWITTER_ID_TABLE[author] : author
+end
+
 def format_log(log)
-  log.author + " * " + git_rev(log.uri) + " : " + strip_content(log.title) + ' ' + log.short_link
+  "#{twitter_id(log.author)} * #{git_rev(log.uri)} : #{strip_content(log.title)} #{log.short_link}"
 end
 
 def post_logs(logs)
@@ -159,8 +174,8 @@ __END__
       Twitter : 
       %a{ :href => 'http://twitter.com/jrubyci'}
         @jrubyci
-    - @logs.each do |log|
-      %table
+    %table
+      - @logs.each do |log|
         %tr
           %td= log.author
           %td= log.title
