@@ -163,39 +163,59 @@ __END__
 @@ index
 !!! XML
 !!! Strict
-
 %html
   %head
+    %meta{ "http-equiv" => 'Content-Type', :content => 'text/html; charset=utf-8'}
     %title JRuby Commitlog monitor
     %link{:href => "/stylesheets/main.css", :rel => "stylesheet", :type => "text/css", :media => "screen"}
+    %link{:href => "/stylesheets/web_app_theme.css", :rel => "stylesheet", :type => "text/css", :media => "screen"}
+    %link{:href => "/stylesheets/web_app_theme_override.css", :rel => "stylesheet", :type => "text/css", :media => "screen"}
+    %link{:href => "/stylesheets/themes/default/style.css", :rel => "stylesheet", :type => "text/css", :media => "screen"}
   %body
-    %h2 JRuby Commit History
-    %p
-      Twitter : 
-      %a{ :href => 'http://twitter.com/jrubyci'}
-        @jrubyci
-    %table
-      - @logs.each do |log|
-        %tr
-          %td= log.author
-          %td= log.title
-          %td
-            %a{ :href => log.short_link}
-              #{log.short_link}
-          %td= log.date
+    #container
+      #header
+        %h1
+          %a{ :href => './'}
+            JRuby Commit History
+    #wrapper.wat-cf
+      #main
+        %p
+          Twitter : 
+          %a{ :href => 'http://twitter.com/jrubyci'}
+            @jrubyci
+        %h2.title Recent changes
+        %table.table
+          %tr
+            %th.first date
+            %th author
+            %th log
+            %th.last link
+          - i = 0
+          - @logs.each do |log|
+            %tr{ :class => ((i += 1) % 2) == 0 ? "even" : "odd" }
+              %td= log.date.strftime("%Y-%m-%d")
+              %td= log.author
+              %td= log.title
+              %td
+                %a{ :href => log.short_link}
+                  #{log.short_link}
     #footer
-      %ul
-        %li
-          Application deployed on 
-          %a{ :href => 'http://code.google.com/appengine'}
-            Google App Engine
-        %li
-          Developed with 
-          %a{ :href => 'http://jruby-appengine.blogspot.com/'}
-            appengine-jruby
-        %li
-          Code hosted on 
-          %a{ :href => 'http://github.com/koichiro/jruby-ci/tree'}
-            GitHub
-      %img{ :src => "http://code.google.com/appengine/images/appengine-noborder-120x30.gif", :alt => "Powered by Google App Engine"}
+      .block
+        %h3.title About this site:
+        .content{ :align => "right"}
+          %ul
+            %li
+              Application deployed on 
+              %a{ :href => 'http://code.google.com/appengine'}
+                Google App Engine
+            %li
+              Developed with 
+              %a{ :href => 'http://jruby-appengine.blogspot.com/'}
+                appengine-jruby
+            %li
+              Code hosted on 
+              %a{ :href => 'http://github.com/koichiro/jruby-ci/tree'}
+                GitHub
+          %a{ :href => 'http://code.google.com/appengine' }
+            %img{ :src => "http://code.google.com/appengine/images/appengine-noborder-120x30.gif", :alt => "Powered by Google App Engine" }
 
