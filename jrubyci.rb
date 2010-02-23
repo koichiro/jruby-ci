@@ -14,7 +14,7 @@ JRUBY_REPOSITORY_FEED_URL = java.net.URL.new("http://github.com/feeds/jruby/comm
 TWITTER_ID_TABLE = {
   "Thomas E. Enebo" => "@tom_enebo",
   "Charles Oliver Nutter" => "@headius",
-  "Nick Siger" => "@nicksiger",
+  "Nick Sieger" => "@nicksieger",
   "Yoko Harada" => "@yokolet",
   "NAKAMURA" => "@nahi",
   "Vladimir Sizikov" => "@vsizikov",
@@ -90,7 +90,7 @@ def git_rev(uri)
 end
 
 def twitter_id(author)
-  TWITTER_ID_TABLE[author] ? TWITTER_ID_TABLE[author] : author
+  TWITTER_ID_TABLE[author] ? "." + TWITTER_ID_TABLE[author] : author
 end
 
 def format_log(log)
