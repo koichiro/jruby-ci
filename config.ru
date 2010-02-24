@@ -2,7 +2,6 @@ require 'appengine-rack'
 AppEngine::Rack.configure_app(          
     :application => "jruby-ci",           
     :precompilation_enabled => true,
-    :version => "1")
-#run lambda { Rack::Response.new("Hello").finish }
+    :version => "2")
 require 'jrubyci'
 run Sinatra::Application

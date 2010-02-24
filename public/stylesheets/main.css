@@ -1,22 +1,32 @@
 @charset "utf-8";
 
-.commandButton {
-    border: ridge 5px #ffffff;
-    background-color: white;
-    color: black;
+#main a {
+  font-size: 12px;
+  padding-left: 10px;
+  background-position: left center;
+  background-repeat: no-repeat;
 }
 
-.coomandButton:active {
-    border: groove 5px #ff00ff;
-    backgrpound-color: black;
-    color: white;
+#main a.diff-open:link { background-image: url(/images/spindown-open.gif); }
+#main a.diff-open:visited,
+#main a.diff-open:hover,
+#main a.diff-open:active { background-image: url(/images/spindown-open.gif); }
+
+#main a.diff-closed:link { background-image: url(/images/spindown-closed.gif); }
+#main a.diff-closed:visited,
+#main a.diff-closed:hover,
+#main a.diff-closed:active { background-image: url(/images/spindown-closed.gif); }
+
+#main .diff-content {
+   border: 1px solid black;
+   margin: 5px;
+   padding: 5px;
 }
 
-#controlePanel {
-    margin: 10px;
+#main .diff-content a {
+   font-size: 12px;
+   padding-left: 0px;
+   background-position: left center;
+   background-repeat: no-repeat;
+   color: royal blue2;
 }
-
-#output {
-    mergin: 10px;
-}
-

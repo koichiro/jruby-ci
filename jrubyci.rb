@@ -146,6 +146,20 @@ def update(feeds)
   newlogs
 end
 
+def replace_source_link(content, link)
+  i = -1
+  content.gsub(/^(<pre>|)([m+\-]) (.*)/) do
+    i += 1
+    "#{$1}#{$2} <a href='#{link}#diff-#{i.to_s}'>#{$3}</a>"
+  end
+end
+
+get '/diff/:id' do |id|
+  log = CommitLog.first(:id => id)
+  halt 404, "diff not found." unless log
+  replace_source_link(log.content, log.link)
+end
+
 get '/tweet' do
   @logs = CommitLog.all(:posted => false, :order => [:date.asc])
   post_logs(@logs)
@@ -167,10 +181,14 @@ __END__
   %head
     %meta{ "http-equiv" => 'Content-Type', :content => 'text/html; charset=utf-8'}
     %title JRuby Commitlog monitor
-    %link{:href => "/stylesheets/main.css", :rel => "stylesheet", :type => "text/css", :media => "screen"}
+    %link{:href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css", :rel => "stylesheet", :type => "text/css", :media => "all"}
     %link{:href => "/stylesheets/web_app_theme.css", :rel => "stylesheet", :type => "text/css", :media => "screen"}
     %link{:href => "/stylesheets/web_app_theme_override.css", :rel => "stylesheet", :type => "text/css", :media => "screen"}
     %link{:href => "/stylesheets/themes/default/style.css", :rel => "stylesheet", :type => "text/css", :media => "screen"}
+    %link{:href => "/stylesheets/main.css", :rel => "stylesheet", :type => "text/css", :media => "screen"}
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js", :type => "text/javascript"}
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js", :type => "text/javascript"}
+    %script{:src => "/javascripts/main.js", :type => "text/javascript"}
   %body
     #container
       #header
@@ -192,30 +210,39 @@ __END__
             %th.last link
           - i = 0
           - @logs.each do |log|
-            %tr{ :class => ((i += 1) % 2) == 0 ? "even" : "odd" }
-              %td= log.date.strftime("%Y-%m-%d")
+            %tr{:class => ((i += 1) % 2) == 0 ? "even" : "odd" }
+              %td{:rowspan => "2"}= log.date.strftime("%Y-%m-%d")
               %td= log.author
               %td= log.title
               %td
                 %a{ :href => log.short_link}
                   #{log.short_link}
+            %tr{:class => i == 0 ? "even" : "odd" }
+              %td.diff{:colspan => "3"}
+                %a{:href => "javascript:void(0)", :id => "diff-" + log.id.to_s, :class => "diff-closed"}
+                  View diff
+                %div{:id => "diff-content-" + log.id.to_s, :style => "display: none", :class => "diff-content"}
     #footer
       .block
         %h3.title About this site:
         .content{ :align => "right"}
           %ul
             %li
-              Application deployed on 
+              Application deployed on
               %a{ :href => 'http://code.google.com/appengine'}
                 Google App Engine
             %li
-              Developed with 
+              Developed with
               %a{ :href => 'http://jruby-appengine.blogspot.com/'}
                 appengine-jruby
             %li
-              Code hosted on 
+              Theme from
+              %a{ :href => 'http://github.com/pilu/web-app-theme'}
+                Web App Theme
+              (C) Andrea Franz
+            %li
+              Code hosted on
               %a{ :href => 'http://github.com/koichiro/jruby-ci/tree'}
                 GitHub
           %a{ :href => 'http://code.google.com/appengine' }
             %img{ :src => "http://code.google.com/appengine/images/appengine-noborder-120x30.gif", :alt => "Powered by Google App Engine" }
-
