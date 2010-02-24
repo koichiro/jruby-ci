@@ -1,21 +1,14 @@
 @charset "utf-8";
 
-#main a {
+#main span {
   font-size: 12px;
   padding-left: 10px;
   background-position: left center;
   background-repeat: no-repeat;
 }
 
-#main a.diff-open:link { background-image: url(/images/spindown-open.gif); }
-#main a.diff-open:visited,
-#main a.diff-open:hover,
-#main a.diff-open:active { background-image: url(/images/spindown-open.gif); }
-
-#main a.diff-closed:link { background-image: url(/images/spindown-closed.gif); }
-#main a.diff-closed:visited,
-#main a.diff-closed:hover,
-#main a.diff-closed:active { background-image: url(/images/spindown-closed.gif); }
+#main span.diff-open { background-image: url(/images/spindown-open.gif); }
+#main span.diff-closed { background-image: url(/images/spindown-closed.gif); }
 
 #main .diff-content {
    border: 1px solid black;

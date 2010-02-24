@@ -219,7 +219,7 @@ __END__
                   #{log.short_link}
             %tr{:class => i == 0 ? "even" : "odd" }
               %td.diff{:colspan => "3"}
-                %a{:href => "javascript:void(0)", :id => "diff-" + log.id.to_s, :class => "diff-closed"}
+                %span{:style => "cursor: pointer", :id => "diff-" + log.id.to_s, :class => "diff-closed"}
                   View diff
                 %div{:id => "diff-content-" + log.id.to_s, :style => "display: none", :class => "diff-content"}
     #footer

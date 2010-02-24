@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('a[id^=diff-]').click(function() {
+    $('span[id^=diff-]').click(function() {
 	if (this.id.match(/diff-([0-9]*)/)) {
 	    var id = RegExp.$1;
 	    var diff = '#diff-' + id;
