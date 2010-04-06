@@ -27,12 +27,12 @@ $logger = AppEngine::Logger.new
 class CommitLog
   include DataMapper::Resource
   property :id, Serial
-  property :uri, String
-  property :author, String
-  property :title, Text
-  property :content, Text
-  property :link, String
-  property :short_link, String
+  property :uri, String, :length => 500
+  property :author, String, :length => 500
+  property :title, String, :length => 500
+  property :content, Text, :lazy => false, :length => 500
+  property :link, String, :length => 500
+  property :short_link, String, :length => 100
   property :posted, Boolean
   property :date, DateTime
   property :created_at, DateTime
