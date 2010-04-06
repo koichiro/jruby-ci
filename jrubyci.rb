@@ -30,7 +30,7 @@ class CommitLog
   property :uri, String, :length => 500
   property :author, String, :length => 500
   property :title, String, :length => 500
-  property :content, Text, :lazy => false, :length => 500
+  property :content, Text, :lazy => false
   property :link, String, :length => 500
   property :short_link, String, :length => 100
   property :posted, Boolean
