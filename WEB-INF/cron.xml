@@ -3,11 +3,11 @@
   <cron>
     <url>/fetch</url>
     <description>Fetch JRuby commit history</description>
-    <schedule>every 2 minutes</schedule>
+    <schedule>every 5 minutes</schedule>
   </cron>
   <cron>
     <url>/tweet</url>
     <description>Post tweet</description>
-    <schedule>every 5 minutes</schedule>
+    <schedule>every 10 minutes</schedule>
   </cron>
 </cronentries>

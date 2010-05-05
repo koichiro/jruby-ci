@@ -1,15 +1,15 @@
 require 'sinatra'
-require 'dm-core'
 require 'haml'
 require 'json'
+require 'tiny_ds'
 require 'appengine-apis/logger'
 require 'appengine-apis/urlfetch'
+
 
 import com.sun.syndication.feed.synd.SyndFeed
 import com.sun.syndication.io.XmlReader
 import com.sun.syndication.io.SyndFeedInput
 
-DataMapper.setup(:default, "appengine://auto")
 JRUBY_REPOSITORY_FEED_URL = java.net.URL.new("http://github.com/feeds/jruby/commits/jruby/master")
 TWITTER_ID_TABLE = {
   "Thomas E. Enebo" => "@tom_enebo",
@@ -24,26 +24,20 @@ TWITTER_ID_TABLE = {
 }
 $logger = AppEngine::Logger.new
 
-class CommitLog
-  include DataMapper::Resource
-  property :id, Serial
-  property :uri, String, :length => 500
-  property :author, String, :length => 500
-  property :title, String, :length => 500
-  property :content, Text, :lazy => false
-  property :link, String, :length => 500
-  property :short_link, String, :length => 100
-  property :posted, Boolean
-  property :date, DateTime
-  property :created_at, DateTime
-
-  before :save do
-    self.created_at = Time.now
-  end
+class CommitLog < TinyDS::Base
+  property :uri, :string
+  property :author, :string
+  property :title, :string
+  property :content, :text
+  property :link, :string
+  property :short_link, :string
+  property :posted, :boolean
+  property :date, :time
+  property :created_at, :time
 end
 
 get '/' do
-  @logs = CommitLog.all(:order => [:date.desc], :limit => 10)
+  @logs = CommitLog.query.sort(:date, :desc).all(:limit => 10)
   haml :index
 end
 
@@ -128,18 +122,17 @@ end
 def update(feeds)
   newlogs = []
   feeds.entries.each do |f|
-    unless CommitLog.first(:uri => f.uri)
-      log = CommitLog.new(
+    unless CommitLog.query.filter(:uri => f.uri).all(:limit => 1).first
+      log = CommitLog.create!(
         :uri => f.uri,
         :author => f.authors[0].name,
         :title => f.titleEx.value,
         :content => f.contents[0].value,
         :link => f.link,
         :short_link => url_shorten(f.link),
-        :date => DateTime.parse(f.updatedDate.to_gmtstring),
+        :date => Time.parse(f.updatedDate.to_gmtstring),
         :posted => false
         )
-      log.save
       newlogs << log
     end
   end
@@ -155,13 +148,15 @@ def replace_source_link(content, link)
 end
 
 get '/diff/:id' do |id|
-  log = CommitLog.first(:id => id)
+  log = CommitLog.query.filter(:id => id).all(:limit => 1).first
   halt 404, "diff not found." unless log
   replace_source_link(log.content, log.link)
 end
 
 get '/tweet' do
-  @logs = CommitLog.all(:posted => false, :order => [:date.asc])
+  q = CommitLog.query.sort(:created_at, :asc)
+  q.filter(:posted => false)
+  @logs = q.all(:limit=>10).to_a
   post_logs(@logs)
   redirect '/'
 end
