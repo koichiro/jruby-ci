@@ -1,8 +1,0 @@
-cron:
-- description: Fetch JRuby commit history
-  url: /fetch
-  schedule: every 5 minutes
-- description: Post tweet
-  url: /tweet
-  schedule: every 10 minutes
-  timezone: Asia/Tokyo

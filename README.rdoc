@@ -1,4 +1,0 @@
-= JRuby Commit Monitor
-
-* http://jruby-ci.appspot.com/
-
