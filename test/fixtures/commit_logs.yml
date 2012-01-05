@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  uri: MyString
+  author: MyString
+  title: MyString
+  content: MyText
+  link: MyString
+  short_link: MyString
+  posted: false
+
+two:
+  uri: MyString
+  author: MyString
+  title: MyString
+  content: MyText
+  link: MyString
+  short_link: MyString
+  posted: false
