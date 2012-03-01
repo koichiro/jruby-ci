@@ -11,6 +11,7 @@ class CommitLog < ActiveRecord::Base
     "Wayne Meissner" => "wmeissner",
     "Ola Bini" => "olabini",
     "Marcin Mielzynski" => "lopex",
+    "Subramanya Sastry" => "subbuss",
   }
 
   def self.fetch
