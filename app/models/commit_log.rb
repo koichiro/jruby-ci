@@ -9,7 +9,8 @@ class CommitLog < ActiveRecord::Base
     "Vladimir Sizikov" => "vsizikov",
     "Hiro Asari" => "hiro_asari",
     "Wayne Meissner" => "wmeissner",
-    "Ola Bini" => "olabini"
+    "Ola Bini" => "olabini",
+    "Marcin Mielzynski" => "lopex",
   }
 
   def self.fetch
@@ -37,7 +38,7 @@ class CommitLog < ActiveRecord::Base
       Twitter.update(format_log(log))
       log.posted = true
       log.save
-      sleep 5
+      sleep 10
     end
   end
 
