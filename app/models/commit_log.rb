@@ -12,6 +12,7 @@ class CommitLog < ActiveRecord::Base
     "Ola Bini" => "olabini",
     "Marcin Mielzynski" => "lopex",
     "Subramanya Sastry" => "subbuss",
+    "Charlie Somerville" => "charliesome",
   }
 
   def self.fetch
@@ -62,10 +63,10 @@ class CommitLog < ActiveRecord::Base
   def self.strip_content(str)
     s = str.gsub(/<.*>/, '')
     s.gsub(/\s/, ' ')
-    if s.length <= 90
+    if s.length <= 80
       return s
     else
-      s[0..86] + "..."
+      s[0..76] + "..."
     end
   end
 
