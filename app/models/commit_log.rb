@@ -6,6 +6,7 @@ class CommitLog < ActiveRecord::Base
     "Nick Sieger" => "nicksieger",
     "Yoko Harada" => "yokolet",
     "NAKAMURA" => "nahi",
+    "Hiroshi Nakamura" => "nahi",
     "Vladimir Sizikov" => "vsizikov",
     "Hiro Asari" => "hiro_asari",
     "Wayne Meissner" => "wmeissner",
