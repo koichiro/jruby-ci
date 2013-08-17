@@ -37,11 +37,15 @@ class CommitLog < ActiveRecord::Base
 
   def self.tweet
     commits = CommitLog.where(:posted => false).order("created_at asc")
-    commits.each do |log|
-      Twitter.update(format_log(log))
-      log.posted = true
-      log.save
-      sleep 10
+    begin
+      commits.each do |log|
+        Twitter.update(format_log(log))
+        log.posted = true
+        log.save
+        sleep 10
+      end
+    rescue => e
+      Rails.logger.error "tweet error #{e.message}"
     end
   end
 
