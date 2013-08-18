@@ -1,10 +1,9 @@
 Jrubyci::Application.routes.draw do
-  get "tweet/post"
-
-  get "fetch/update"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
+
+  get "tweet/post"
+  get "fetch/update"
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
@@ -58,5 +57,5 @@ Jrubyci::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  # match ':controller(/:action(/:id))(.:format)'
 end
