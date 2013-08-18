@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(:version => 20120104103443) do
     t.string   "link"
     t.string   "short_link"
     t.boolean  "posted"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "commit_logs", ["uri"], :name => "index_commit_logs_on_uri"
