@@ -1,5 +1,5 @@
 class CommitLog < ActiveRecord::Base
-  FEED_URL = 'https://github.com/feeds/jruby/commits/jruby/master'
+  FEED_URL = 'https://github.com/jruby/jruby/commits/master.atom'
   TWITTER_ID = {
     "Thomas E. Enebo" => "tom_enebo",
     "Charles Oliver Nutter" => "headius",
