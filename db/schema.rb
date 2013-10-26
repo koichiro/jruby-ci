@@ -9,11 +9,14 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120104103443) do
+ActiveRecord::Schema.define(version: 20120104103443) do
 
-  create_table "commit_logs", :force => true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "commit_logs", force: true do |t|
     t.string   "uri"
     t.string   "author"
     t.string   "title"
@@ -21,10 +24,10 @@ ActiveRecord::Schema.define(:version => 20120104103443) do
     t.string   "link"
     t.string   "short_link"
     t.boolean  "posted"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "commit_logs", ["uri"], :name => "index_commit_logs_on_uri"
+  add_index "commit_logs", ["uri"], name: "index_commit_logs_on_uri", using: :btree
 
 end

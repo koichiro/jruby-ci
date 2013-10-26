@@ -1,6 +1,6 @@
 class TweetController < ApplicationController
   def post
-    raise NotFoundError.new unless request.remote_ip == "127.0.0.1"
+    #raise NotFoundError.new unless request.remote_ip == "127.0.0.1"
 
     CommitLog.tweet
 
