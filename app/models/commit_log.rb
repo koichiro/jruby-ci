@@ -16,8 +16,6 @@ class CommitLog < ActiveRecord::Base
     "Charlie Somerville" => "charliesome",
   }
 
-  attr_accessible :uri, :author, :title, :content, :link, :short_link, :posted, :created_at, :updated_at
-
   def self.fetch
     atom = RSS::Parser.parse(open(FEED_URL))
     atom.items.each do |item|
