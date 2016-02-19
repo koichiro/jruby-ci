@@ -38,8 +38,9 @@ class CommitLog < ActiveRecord::Base
   def self.tweet
     commits = CommitLog.where(:posted => false).order("created_at asc")
     begin
+      twitter = Twitter::REST::Client.new(TWITTER_CONFIG)
       commits.each do |log|
-        Twitter.update(format_log(log))
+        twitter.update(format_log(log))
         log.posted = true
         log.save
         sleep 10
